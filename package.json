@@ -1,0 +1,11 @@
+{
+  "name": "claude-code",
+  "version": "1.0.0",
+  "description": "Claude-code project",
+  "scripts": {
+    "kanban": "vibe-kanban"
+  },
+  "devDependencies": {
+    "vibe-kanban": "latest"
+  }
+}
