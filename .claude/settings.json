@@ -1,0 +1,13 @@
+{
+  "extraKnownMarketplaces": {
+    "emilkowalski": {
+      "source": {
+        "source": "github",
+        "repo": "emilkowalski/skill"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "skill@emilkowalski": true
+  }
+}
