@@ -5,9 +5,16 @@
         "source": "github",
         "repo": "emilkowalski/skill"
       }
+    },
+    "pbakaus": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
     }
   },
   "enabledPlugins": {
-    "skill@emilkowalski": true
+    "skill@emilkowalski": true,
+    "impeccable@pbakaus": true
   }
 }
