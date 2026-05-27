@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journée Européenne des Langues – 26 septembre</title>
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --eu-blue:   #003399;
+      --eu-yellow: #FFCC00;
+      --soft-blue: #1a56cc;
+      --light-bg:  #f4f7ff;
+      --text:      #1a1a2e;
+      --muted:     #5a6080;
+      --white:     #ffffff;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(0,51,153,.12);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAVIGATION ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 2px solid var(--eu-yellow);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .8rem 2rem;
+    }
+    .nav-logo {
+      font-size: 1.1rem; font-weight: 700; color: var(--eu-blue);
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .nav-logo .stars { font-size: 1.3rem; }
+    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links a {
+      font-size: .9rem; font-weight: 600; color: var(--muted);
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--eu-blue); }
+    .nav-cta {
+      background: var(--eu-blue); color: var(--white);
+      padding: .45rem 1.1rem; border-radius: 20px;
+      font-size: .85rem; font-weight: 700;
+      transition: background .2s;
+    }
+    .nav-cta:hover { background: var(--soft-blue); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--eu-blue) 0%, #0a1f6b 60%, #1a3080 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-stars {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,204,0,.15) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: drift 30s linear infinite;
+    }
+    @keyframes drift { from { background-position: 0 0; } to { background-position: 40px 40px; } }
+    .hero-content { position: relative; max-width: 700px; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--eu-yellow); color: var(--eu-blue);
+      font-weight: 800; font-size: .8rem; letter-spacing: .1em; text-transform: uppercase;
+      padding: .35rem 1rem; border-radius: 20px; margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900; color: var(--white); line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: var(--eu-yellow); }
+    .hero-sub {
+      font-size: 1.15rem; color: rgba(255,255,255,.8);
+      margin-bottom: 2.5rem; max-width: 520px; margin-inline: auto;
+    }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--eu-yellow); color: var(--eu-blue);
+      font-weight: 800; padding: .85rem 2rem; border-radius: 30px;
+      font-size: 1rem; transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 16px rgba(255,204,0,.4);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,204,0,.5); }
+    .btn-outline {
+      border: 2px solid rgba(255,255,255,.6); color: var(--white);
+      font-weight: 700; padding: .85rem 2rem; border-radius: 30px;
+      font-size: 1rem; transition: background .2s;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.1); }
+    .hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,.5); font-size: .85rem;
+      display: flex; flex-direction: column; align-items: center; gap: .4rem;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    .hero-scroll::after {
+      content: '▼'; font-size: .7rem;
+    }
+
+    /* ── STATS BAND ── */
+    .stats-band {
+      background: var(--eu-yellow);
+      display: flex; justify-content: center; flex-wrap: wrap; gap: 0;
+    }
+    .stat {
+      padding: 1.5rem 3rem; text-align: center;
+      border-right: 1px solid rgba(0,51,153,.15);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-number { font-size: 2.2rem; font-weight: 900; color: var(--eu-blue); }
+    .stat-label { font-size: .8rem; font-weight: 700; color: rgba(0,51,153,.7); text-transform: uppercase; letter-spacing: .05em; }
+
+    /* ── SECTIONS COMMON ── */
+    section { padding: 5rem 2rem; }
+    .container { max-width: 1100px; margin-inline: auto; }
+    .section-tag {
+      display: inline-block;
+      font-size: .75rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--eu-blue); background: rgba(0,51,153,.08);
+      padding: .3rem .9rem; border-radius: 20px; margin-bottom: .8rem;
+    }
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 900; line-height: 1.2; margin-bottom: 1rem;
+    }
+    .lead {
+      font-size: 1.1rem; color: var(--muted); max-width: 620px; margin-bottom: 3rem;
+    }
+
+    /* ── À PROPOS ── */
+    .about { background: var(--light-bg); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+    }
+    .about-visual {
+      background: var(--eu-blue); border-radius: var(--radius);
+      padding: 3rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .about-visual::before {
+      content: '🗺️'; font-size: 8rem; opacity: .15;
+      position: absolute; top: -1rem; right: -1rem; line-height: 1;
+    }
+    .about-date {
+      font-size: 5rem; font-weight: 900; color: var(--eu-yellow); line-height: 1;
+    }
+    .about-month {
+      font-size: 1.4rem; font-weight: 700; color: var(--white); text-transform: uppercase; letter-spacing: .1em;
+    }
+    .about-since {
+      margin-top: 1.5rem; font-size: .9rem; color: rgba(255,255,255,.65);
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; }
+    .about-text ul {
+      list-style: none; display: flex; flex-direction: column; gap: .7rem; margin-top: 1.5rem;
+    }
+    .about-text li {
+      display: flex; align-items: flex-start; gap: .8rem; font-size: .95rem;
+    }
+    .about-text li::before {
+      content: '✦'; color: var(--eu-yellow); background: var(--eu-blue);
+      width: 1.6rem; height: 1.6rem; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: .6rem; flex-shrink: 0; margin-top: .15rem;
+    }
+
+    /* ── LANGUES ── */
+    .langs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem;
+      margin-top: 2.5rem;
+    }
+    .lang-card {
+      background: var(--white); border: 2px solid transparent;
+      border-radius: var(--radius); padding: 1.2rem 1rem; text-align: center;
+      box-shadow: var(--shadow); cursor: default;
+      transition: border-color .2s, transform .2s;
+    }
+    .lang-card:hover { border-color: var(--eu-blue); transform: translateY(-4px); }
+    .lang-flag { font-size: 2.2rem; margin-bottom: .5rem; }
+    .lang-name { font-weight: 700; font-size: .95rem; color: var(--eu-blue); }
+    .lang-hello { font-size: .8rem; color: var(--muted); font-style: italic; }
+
+    /* ── ANECDOTES ── */
+    .facts { background: var(--eu-blue); }
+    .facts h2, .facts .section-tag, .facts .lead { color: var(--white); }
+    .facts .section-tag { background: rgba(255,204,0,.2); color: var(--eu-yellow); }
+    .facts .lead { color: rgba(255,255,255,.7); }
+    .facts-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem;
+    }
+    .fact-card {
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius); padding: 1.8rem;
+      transition: background .2s;
+    }
+    .fact-card:hover { background: rgba(255,255,255,.12); }
+    .fact-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .fact-card h3 { font-size: 1rem; font-weight: 700; color: var(--eu-yellow); margin-bottom: .5rem; }
+    .fact-card p { font-size: .9rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+
+    /* ── ACTIVITÉS ── */
+    .activities { background: var(--light-bg); }
+    .activities-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;
+    }
+    .activity-card {
+      background: var(--white); border-radius: var(--radius);
+      overflow: hidden; box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .activity-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,51,153,.18); }
+    .activity-top {
+      height: 120px; display: flex; align-items: center; justify-content: center;
+      font-size: 3.5rem;
+    }
+    .activity-body { padding: 1.5rem; }
+    .activity-body h3 { font-size: 1.1rem; font-weight: 800; color: var(--eu-blue); margin-bottom: .5rem; }
+    .activity-body p { font-size: .9rem; color: var(--muted); }
+    .activity-tag {
+      display: inline-block; margin-top: .8rem;
+      font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+      padding: .2rem .7rem; border-radius: 20px;
+    }
+
+    /* ── QUIZ ── */
+    .quiz-section { background: var(--white); }
+    .quiz-box {
+      background: var(--light-bg); border: 2px solid rgba(0,51,153,.1);
+      border-radius: 16px; padding: 2.5rem; max-width: 700px; margin-inline: auto;
+    }
+    .quiz-question {
+      font-size: 1.2rem; font-weight: 700; color: var(--eu-blue); margin-bottom: 1.5rem; text-align: center;
+    }
+    .quiz-options {
+      display: grid; grid-template-columns: 1fr 1fr; gap: .8rem;
+    }
+    .quiz-btn {
+      background: var(--white); border: 2px solid rgba(0,51,153,.2);
+      border-radius: var(--radius); padding: .9rem 1rem;
+      font-size: .95rem; font-weight: 600; cursor: pointer; text-align: center;
+      transition: all .2s; color: var(--text);
+    }
+    .quiz-btn:hover { border-color: var(--eu-blue); background: rgba(0,51,153,.05); }
+    .quiz-btn.correct { background: #d4edda; border-color: #28a745; color: #155724; }
+    .quiz-btn.wrong   { background: #f8d7da; border-color: #dc3545; color: #721c24; }
+    .quiz-result {
+      text-align: center; margin-top: 1.5rem; font-size: 1rem; font-weight: 600; min-height: 1.5rem;
+    }
+    .quiz-nav { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; }
+    .quiz-nav button {
+      background: var(--eu-blue); color: var(--white);
+      border: none; padding: .6rem 1.5rem; border-radius: 20px;
+      font-size: .9rem; font-weight: 700; cursor: pointer;
+      transition: background .2s;
+    }
+    .quiz-nav button:hover { background: var(--soft-blue); }
+    .quiz-score { text-align: center; font-size: 1.4rem; font-weight: 700; color: var(--eu-blue); margin-top: 1.5rem; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, #ffcc00 0%, #ffd740 100%);
+      text-align: center; padding: 4rem 2rem;
+    }
+    .cta-banner h2 { color: var(--eu-blue); margin-bottom: 1rem; }
+    .cta-banner p { color: rgba(0,51,153,.75); margin-bottom: 2rem; font-size: 1.05rem; }
+    .cta-banner .btn-primary { background: var(--eu-blue); color: var(--eu-yellow); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1230; color: rgba(255,255,255,.6);
+      padding: 3rem 2rem; text-align: center;
+    }
+    .footer-stars { font-size: 1.8rem; margin-bottom: 1rem; letter-spacing: .5rem; }
+    .footer-title { font-size: 1.1rem; font-weight: 700; color: var(--white); margin-bottom: .5rem; }
+    .footer-links {
+      display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0;
+      flex-wrap: wrap;
+    }
+    .footer-links a { font-size: .85rem; transition: color .2s; }
+    .footer-links a:hover { color: var(--eu-yellow); }
+    .footer-copy { font-size: .8rem; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: .7rem 1rem; }
+      .nav-links { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .quiz-options { grid-template-columns: 1fr; }
+      .stat { padding: 1.2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-logo">
+    <span class="stars">★★★★★</span>
+    JEL 2025
+  </div>
+  <div class="nav-links">
+    <a href="#about">À propos</a>
+    <a href="#langues">Langues</a>
+    <a href="#activites">Activités</a>
+    <a href="#quiz">Quiz</a>
+  </div>
+  <a href="#quiz" class="nav-cta">Tester mes connaissances</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stars"></div>
+  <div class="hero-content">
+    <div class="hero-badge">26 septembre · Chaque année</div>
+    <h1>Journée<br><span>Européenne</span><br>des Langues</h1>
+    <p class="hero-sub">Célébrons ensemble la richesse linguistique de l'Europe — 24 langues officielles, des centaines de dialectes, une seule identité.</p>
+    <div class="hero-buttons">
+      <a href="#about" class="btn-primary">Découvrir</a>
+      <a href="#quiz" class="btn-outline">Faire le quiz</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Défiler</div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat">
+    <div class="stat-number">24</div>
+    <div class="stat-label">Langues officielles UE</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">200+</div>
+    <div class="stat-label">Langues parlées en Europe</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">2001</div>
+    <div class="stat-label">Première édition</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">47</div>
+    <div class="stat-label">Pays participants</div>
+  </div>
+</div>
+
+<!-- À PROPOS -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual">
+        <div class="about-date">26</div>
+        <div class="about-month">Septembre</div>
+        <div class="about-since">Célébrée depuis 2001 dans toute l'Europe</div>
+      </div>
+      <div class="about-text">
+        <div class="section-tag">À propos</div>
+        <h2>Pourquoi cette journée ?</h2>
+        <p>Lancée en 2001 lors de l'Année européenne des langues par le Conseil de l'Europe, la Journée européenne des langues est célébrée chaque année le <strong>26 septembre</strong> dans plus de 47 pays.</p>
+        <p>Elle vise à encourager l'apprentissage des langues tout au long de la vie, à promouvoir la riche diversité linguistique de l'Europe et à sensibiliser aux différentes langues parlées sur le continent.</p>
+        <ul>
+          <li>Promouvoir le multilinguisme et la diversité culturelle</li>
+          <li>Encourager l'apprentissage des langues à tout âge</li>
+          <li>Célébrer le patrimoine linguistique européen</li>
+          <li>Renforcer la compréhension et le dialogue interculturels</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUES -->
+<section id="langues">
+  <div class="container">
+    <div class="section-tag">Les langues de l'Europe</div>
+    <h2>Bonjour dans toute l'Europe</h2>
+    <p class="lead">Chaque langue est une fenêtre sur une culture unique. Voici quelques-unes des langues officielles de l'Union Européenne.</p>
+    <div class="langs-grid">
+      <div class="lang-card"><div class="lang-flag">🇫🇷</div><div class="lang-name">Français</div><div class="lang-hello">Bonjour !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇩🇪</div><div class="lang-name">Allemand</div><div class="lang-hello">Guten Tag !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇪🇸</div><div class="lang-name">Espagnol</div><div class="lang-hello">¡ Hola !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇮🇹</div><div class="lang-name">Italien</div><div class="lang-hello">Ciao !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇵🇹</div><div class="lang-name">Portugais</div><div class="lang-hello">Olá !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇳🇱</div><div class="lang-name">Néerlandais</div><div class="lang-hello">Hallo !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇵🇱</div><div class="lang-name">Polonais</div><div class="lang-hello">Cześć !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇸🇪</div><div class="lang-name">Suédois</div><div class="lang-hello">Hej !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇬🇷</div><div class="lang-name">Grec</div><div class="lang-hello">Γεια σου !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇷🇴</div><div class="lang-name">Roumain</div><div class="lang-hello">Bună !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇭🇺</div><div class="lang-name">Hongrois</div><div class="lang-hello">Szia !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇨🇿</div><div class="lang-name">Tchèque</div><div class="lang-hello">Ahoj !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇩🇰</div><div class="lang-name">Danois</div><div class="lang-hello">Hej !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇫🇮</div><div class="lang-name">Finnois</div><div class="lang-hello">Hei !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇧🇬</div><div class="lang-name">Bulgare</div><div class="lang-hello">Здравей !</div></div>
+      <div class="lang-card"><div class="lang-flag">🇮🇪</div><div class="lang-name">Irlandais</div><div class="lang-hello">Dia dhuit !</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAITS INSOLITES -->
+<section class="facts">
+  <div class="container">
+    <div class="section-tag">Le saviez-vous ?</div>
+    <h2>Faits étonnants sur les langues</h2>
+    <p class="lead">Les langues d'Europe cachent des trésors insoupçonnés de culture et d'histoire.</p>
+    <div class="facts-grid">
+      <div class="fact-card">
+        <div class="fact-icon">🔤</div>
+        <h3>L'alphabet grec a 2 800 ans</h3>
+        <p>Le grec est l'une des plus anciennes langues encore parlées au monde. Son alphabet a directement inspiré l'alphabet latin utilisé aujourd'hui.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🌍</div>
+        <h3>Le basque, une langue mystère</h3>
+        <p>L'euskara (basque) est une langue isolée : elle n'appartient à aucune famille linguistique connue et existait avant l'arrivée des langues indo-européennes.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">📚</div>
+        <h3>Le luxembourgeois a 3 langues officielles</h3>
+        <p>Au Luxembourg, le luxembourgeois, le français et l'allemand sont tous les trois langues officielles. La plupart des habitants les parlent couramment.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🗣️</div>
+        <h3>Le finnois et le hongrois sont cousins</h3>
+        <p>Bien que séparés géographiquement, le finnois et le hongrois appartiennent à la même famille ouralienne — contrairement aux autres langues européennes.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">💬</div>
+        <h3>Le maltais, langue sémitique en UE</h3>
+        <p>Le maltais est la seule langue sémitique parmi les langues officielles de l'UE. Il est fortement influencé par l'arabe, l'italien et le français.</p>
+      </div>
+      <div class="fact-card">
+        <div class="fact-icon">🎵</div>
+        <h3>L'intonation change le sens</h3>
+        <p>En suédois et en norvégien, le même mot peut avoir deux sens différents selon son intonation — un peu comme en mandarin, mais en Europe du Nord !</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITÉS -->
+<section class="activities" id="activites">
+  <div class="container">
+    <div class="section-tag">Participer</div>
+    <h2>Comment célébrer la journée ?</h2>
+    <p class="lead">Il existe mille façons de participer à la Journée Européenne des Langues, que vous soyez enseignant, élève ou simple curieux.</p>
+    <div class="activities-grid">
+      <div class="activity-card">
+        <div class="activity-top" style="background:#e8f0ff;">📖</div>
+        <div class="activity-body">
+          <h3>Lire dans une autre langue</h3>
+          <p>Commencez par un texte court — une nouvelle, un article ou même un album illustré — dans une langue que vous apprenez ou voulez découvrir.</p>
+          <span class="activity-tag" style="background:#e8f0ff;color:#003399;">Individuel</span>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-top" style="background:#fff8e1;">🎬</div>
+        <div class="activity-body">
+          <h3>Regarder un film en V.O.</h3>
+          <p>Choisissez un film dans une langue européenne — espagnol, danois, polonais… — et laissez-vous porter par les mots et les sons.</p>
+          <span class="activity-tag" style="background:#fff8e1;color:#c17700;">En famille</span>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-top" style="background:#e8ffe8;">🍽️</div>
+        <div class="activity-body">
+          <h3>Repas européen multilingue</h3>
+          <p>Organisez un repas où chaque plat est nommé dans une langue différente. Apprenez à dire « merci » et « délicieux » dans 5 langues !</p>
+          <span class="activity-tag" style="background:#e8ffe8;color:#1a7f2e;">Convivial</span>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-top" style="background:#ffe8f5;">🎤</div>
+        <div class="activity-body">
+          <h3>Chanter en langues étrangères</h3>
+          <p>La musique est le meilleur professeur de langues. Apprenez les paroles d'une chanson emblématique dans une langue étrangère.</p>
+          <span class="activity-tag" style="background:#ffe8f5;color:#8b1a5e;">Créatif</span>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-top" style="background:#e8f8ff;">🏫</div>
+        <div class="activity-body">
+          <h3>Ateliers en classe</h3>
+          <p>Organisez un « marché des langues » où les élèves présentent une langue de leur choix : culture, traditions, quelques mots à apprendre.</p>
+          <span class="activity-tag" style="background:#e8f8ff;color:#006699;">Éducatif</span>
+        </div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-top" style="background:#f0ffe8;">💻</div>
+        <div class="activity-body">
+          <h3>Apprendre en ligne</h3>
+          <p>Des plateformes comme Duolingo, Babbel ou les ressources du Conseil de l'Europe offrent des contenus gratuits pour tous les niveaux.</p>
+          <span class="activity-tag" style="background:#f0ffe8;color:#2e6b00;">Numérique</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:2.5rem;">
+      <div class="section-tag">Quiz</div>
+      <h2>Testez vos connaissances !</h2>
+      <p class="lead" style="margin-inline:auto;">Combien de langues européennes connaissez-vous vraiment ?</p>
+    </div>
+    <div class="quiz-box">
+      <div class="quiz-question" id="quiz-question">Chargement...</div>
+      <div class="quiz-options" id="quiz-options"></div>
+      <div class="quiz-result" id="quiz-result"></div>
+      <div class="quiz-nav">
+        <button id="quiz-next" style="display:none;">Question suivante →</button>
+      </div>
+      <div class="quiz-score" id="quiz-score"></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="container">
+    <h2>Partagez la diversité linguistique !</h2>
+    <p>Le 26 septembre, rejoignez des millions de personnes à travers l'Europe qui célèbrent les langues. Chaque mot compte.</p>
+    <a href="https://edl.ecml.at" target="_blank" rel="noopener" class="btn-primary">Site officiel du Conseil de l'Europe</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-stars">★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★ ★</div>
+  <div class="footer-title">Journée Européenne des Langues</div>
+  <p>Une initiative du Conseil de l'Europe et de la Commission Européenne</p>
+  <div class="footer-links">
+    <a href="#about">À propos</a>
+    <a href="#langues">Langues</a>
+    <a href="#activites">Activités</a>
+    <a href="#quiz">Quiz</a>
+    <a href="https://edl.ecml.at" target="_blank" rel="noopener">Site officiel</a>
+  </div>
+  <div class="footer-copy">© 2025 · Journée Européenne des Langues · 26 septembre</div>
+</footer>
+
+<script>
+  // ── QUIZ ──
+  const questions = [
+    {
+      q: "Comment dit-on « bonjour » en finnois ?",
+      opts: ["Terve", "Hej", "Szia", "Čau"],
+      ans: 0
+    },
+    {
+      q: "Quelle est la seule langue sémitique parmi les langues officielles de l'UE ?",
+      opts: ["Maltais", "Arabe", "Hébreu", "Catalan"],
+      ans: 0
+    },
+    {
+      q: "En quelle année a été célébrée la première Journée Européenne des Langues ?",
+      opts: ["2001", "1995", "2007", "1989"],
+      ans: 0
+    },
+    {
+      q: "Combien de langues officielles compte l'Union Européenne ?",
+      opts: ["24", "28", "20", "32"],
+      ans: 0
+    },
+    {
+      q: "À quelle famille de langues appartient le basque (euskara) ?",
+      opts: ["Aucune — langue isolée", "Indo-européenne", "Sémitique", "Ouralienne"],
+      ans: 0
+    },
+    {
+      q: "Quelle langue est l'ancêtre commun du français, de l'espagnol et du roumain ?",
+      opts: ["Le latin", "Le grec", "Le gaulois", "L'occitan"],
+      ans: 0
+    },
+    {
+      q: "Le finnois et le hongrois appartiennent à la même famille de langues. Laquelle ?",
+      opts: ["Ouralienne", "Slave", "Germanique", "Romane"],
+      ans: 0
+    },
+    {
+      q: "Combien de langues officielles le Luxembourg possède-t-il ?",
+      opts: ["3", "2", "4", "1"],
+      ans: 0
+    }
+  ];
+
+  let currentQ = 0;
+  let score = 0;
+  let answered = false;
+
+  function loadQuestion() {
+    const q = questions[currentQ];
+    document.getElementById('quiz-question').textContent =
+      `Q${currentQ + 1}/${questions.length} — ${q.q}`;
+    const opts = document.getElementById('quiz-options');
+    opts.innerHTML = '';
+    q.opts.forEach((opt, i) => {
+      const btn = document.createElement('button');
+      btn.className = 'quiz-btn';
+      btn.textContent = opt;
+      btn.addEventListener('click', () => answer(i));
+      opts.appendChild(btn);
+    });
+    document.getElementById('quiz-result').textContent = '';
+    document.getElementById('quiz-next').style.display = 'none';
+    document.getElementById('quiz-score').textContent = '';
+    answered = false;
+  }
+
+  function answer(idx) {
+    if (answered) return;
+    answered = true;
+    const q = questions[currentQ];
+    const btns = document.querySelectorAll('.quiz-btn');
+    const result = document.getElementById('quiz-result');
+    const nextBtn = document.getElementById('quiz-next');
+    if (idx === q.ans) {
+      btns[idx].classList.add('correct');
+      result.textContent = '✅ Correct ! Bravo !';
+      result.style.color = '#155724';
+      score++;
+    } else {
+      btns[idx].classList.add('wrong');
+      btns[q.ans].classList.add('correct');
+      result.textContent = `❌ Dommage ! La bonne réponse était : « ${q.opts[q.ans]} »`;
+      result.style.color = '#721c24';
+    }
+    if (currentQ < questions.length - 1) {
+      nextBtn.style.display = 'inline-block';
+    } else {
+      showFinalScore();
+    }
+  }
+
+  document.getElementById('quiz-next').addEventListener('click', () => {
+    currentQ++;
+    loadQuestion();
+  });
+
+  function showFinalScore() {
+    const pct = Math.round((score / questions.length) * 100);
+    let msg = pct >= 75 ? '🏆 Expert linguistique !' : pct >= 50 ? '👍 Bon niveau !' : '📚 À réviser !';
+    document.getElementById('quiz-score').innerHTML =
+      `<br>Score final : <strong>${score} / ${questions.length}</strong> (${pct}%) — ${msg}`;
+  }
+
+  loadQuestion();
+
+  // ── SMOOTH APPEAR ON SCROLL ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.lang-card, .fact-card, .activity-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
