@@ -298,6 +298,43 @@
     .footer-links a:hover { color: var(--eu-yellow); }
     .footer-copy { font-size: .8rem; }
 
+    /* ── HERO LOGO ── */
+    .hero-logo {
+      width: 180px; margin-inline: auto; margin-bottom: 1.5rem;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,.3));
+    }
+
+    /* ── CARTE ── */
+    .map-section { background: var(--light-bg); padding: 4rem 2rem; }
+    .map-wrapper {
+      max-width: 1000px; margin-inline: auto;
+      border-radius: 16px; overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    .map-wrapper img { width: 100%; height: auto; display: block; }
+
+    /* ── PARTENAIRES ── */
+    .partners { background: var(--white); padding: 4rem 2rem; }
+    .partners h2 { margin-bottom: .5rem; }
+    .partners .lead { margin-bottom: 2.5rem; }
+    .partners-grid {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      justify-content: center; align-items: center;
+    }
+    .partner-card {
+      background: var(--light-bg); border-radius: var(--radius);
+      padding: 2rem 2.5rem; text-align: center;
+      box-shadow: var(--shadow); transition: transform .2s;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      min-width: 220px;
+    }
+    .partner-card:hover { transform: translateY(-4px); }
+    .partner-card img { max-height: 80px; max-width: 200px; object-fit: contain; }
+    .partner-card a {
+      font-size: .85rem; font-weight: 600; color: var(--eu-blue);
+      text-decoration: underline; text-underline-offset: 3px;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: .7rem 1rem; }
@@ -305,6 +342,7 @@
       .about-grid { grid-template-columns: 1fr; }
       .quiz-options { grid-template-columns: 1fr; }
       .stat { padding: 1.2rem 1.5rem; }
+      .hero-logo { width: 130px; }
     }
   </style>
 </head>
@@ -329,6 +367,7 @@
 <section class="hero">
   <div class="hero-stars"></div>
   <div class="hero-content">
+    <img src="images/logo-jel.png" alt="Logo Journée Européenne des Langues" class="hero-logo" />
     <div class="hero-badge">26 septembre · Chaque année</div>
     <h1>Journée<br><span>Européenne</span><br>des Langues</h1>
     <p class="hero-sub">Célébrons ensemble la richesse linguistique de l'Europe — 24 langues officielles, des centaines de dialectes, une seule identité.</p>
@@ -408,6 +447,20 @@
       <div class="lang-card"><div class="lang-flag">🇫🇮</div><div class="lang-name">Finnois</div><div class="lang-hello">Hei !</div></div>
       <div class="lang-card"><div class="lang-flag">🇧🇬</div><div class="lang-name">Bulgare</div><div class="lang-hello">Здравей !</div></div>
       <div class="lang-card"><div class="lang-flag">🇮🇪</div><div class="lang-name">Irlandais</div><div class="lang-hello">Dia dhuit !</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CARTE DES LANGUES -->
+<section class="map-section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:2rem;">
+      <div class="section-tag">Carte</div>
+      <h2>La carte des langues européennes</h2>
+      <p class="lead" style="margin-inline:auto;">Une carte détaillée de toutes les langues et dialectes parlés sur le continent européen.</p>
+    </div>
+    <div class="map-wrapper">
+      <img src="images/carte-langues.png" alt="Carte des langues européennes et de leurs dialectes" />
     </div>
   </div>
 </section>
@@ -528,6 +581,33 @@
         <button id="quiz-next" style="display:none;">Question suivante →</button>
       </div>
       <div class="quiz-score" id="quiz-score"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTENAIRES -->
+<section class="partners" id="partenaires">
+  <div class="container">
+    <div class="section-tag">Partenaires & Ressources</div>
+    <h2>Ils soutiennent les langues</h2>
+    <p class="lead">Des organisations et initiatives dédiées à la promotion et à la préservation du patrimoine linguistique européen.</p>
+    <div class="partners-grid">
+      <div class="partner-card">
+        <img src="images/logo-devulgare.png" alt="Logo De Vulgare" />
+        <div>
+          <div style="font-weight:700;color:var(--eu-blue);margin-bottom:.3rem;">De Vulgare</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;">Plateforme dédiée aux langues romanes et à leur diversité culturelle.</p>
+          <a href="https://www.devulgare.com" target="_blank" rel="noopener">devulgare.com →</a>
+        </div>
+      </div>
+      <div class="partner-card">
+        <img src="images/logo-ils.png" alt="Logo Institut de la Langue Savoyarde" />
+        <div>
+          <div style="font-weight:700;color:var(--eu-blue);margin-bottom:.3rem;">Institut de la Langue Savoyarde</div>
+          <p style="font-size:.85rem;color:var(--muted);margin-bottom:.5rem;">Association dédiée à la conservation et à la promotion du francoprovençal de Savoie.</p>
+          <a href="https://www.langue-savoyarde.com" target="_blank" rel="noopener">langue-savoyarde.com →</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
